@@ -1,0 +1,53 @@
+$padding: 15px;
+$desktop: 840px;
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "Montserrat";
+  margin: 0;
+
+  #bg {
+    clip-path: polygon(100% 0, 100% 82%, 45% 100%, 0 100%, 0 0);
+    background: #44acab;
+    background-image: linear-gradient(
+      90deg,
+      #6e40aa,
+      #6154c8,
+      #4c6edb,
+      #368ce1,
+      #24aad8,
+      #1ac7c2,
+      #1ddea3,
+      #30ee83,
+      #52f667,
+      #7ef658,
+      #7ef658
+    );
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+
+    @include desktop {
+      clip-path: polygon(0 0, 75% 0, 55% 100%, 0% 100%);
+    }
+  }
+
+  header a {
+    color: #fff;
+    text-decoration: none;
+    padding: $padding;
+    display: block;
+    text-transform: uppercase;
+  }
+}
