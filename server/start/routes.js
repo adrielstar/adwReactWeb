@@ -20,4 +20,5 @@ Route.group(() => {
   Route.post('login', 'UserController.login');
   Route.post('register', 'UserController.register');
   Route.get('getuser/:id', 'UserController.show');
+  Route.get('getusers', 'UserController.showList');
 }).prefix('users');

@@ -25,7 +25,7 @@ export default class Landing extends Component {
             <h1>Your Personal Assistant</h1>
             <p>Get help with your daily life stuff.</p>
 
-            <a href="/register">Register Now</a>
+            <a href="/register" className="btn btn-lg btn-dark">Register Now</a>
         </section>
     </main>
     )

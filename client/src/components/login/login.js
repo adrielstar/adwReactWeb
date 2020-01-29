@@ -1,16 +1,18 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './login.scss'
 import { login } from '../UserFunctions';
 
+let errors = {};
+
 export default class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      email: undefined,
-      password: undefined,
+      email: '',
+      password: '',
       errors: {
         email: '',
-      password: '',
+        password: '',
       }
     }
 
@@ -19,6 +21,8 @@ export default class Login extends Component {
   }
 
   onChange(e) {
+    errors["errormsg"] = "";
+    this.setState({errors: errors});
     this.setState({ [e.target.name]: e.target.value })
   }
 
@@ -29,10 +33,32 @@ export default class Login extends Component {
       email: this.state.email,
       password: this.state.password,
     }
+    if (this.validateForm(this.state)) {
+      login(newUser).then(res => {
+        if (res === undefined) {
+          errors["errormsg"] = "Invalid email or password!";
+          this.setState({errors: errors});
+        } else {
+          this.props.history.push('/profile');
+        }
+      });
+    } else {
+      console.log("incorect");
+    }
 
-    login(newUser).then(res => {
-      this.props.history.push('/profile');
-    })
+  }
+
+  validateForm(errors) {
+    let valid = true;
+    Object.values(errors.errors).forEach(
+      (val) => val.length > 0 && (valid = false)
+    );
+
+    Object.values(errors).forEach(
+      (val) => val === '' && (valid = false)
+    );
+
+    return valid;
   }
 
   render() {
@@ -59,12 +85,13 @@ export default class Login extends Component {
                 value={this.state.password}
                 onChange={this.onChange} />
             </div>
-            <button type="submit" className="btn btn-lg btn-primary btn-block">
+            <span className='error'>{this.state.errors["errormsg"]}</span>
+            <button type="submit" className="btn btn-lg btn-dark btn-block">
               Sign in
             </button>
             <div>
               <a href="/register" className="text-danger">
-                  Not a user register here
+                Not a user register here
               </a>
             </div>
           </form>

@@ -2,16 +2,16 @@ import axios from 'axios';
 
 export const register = newUser => {
   return axios
-  .post('/users/register', {
-    username: newUser.username,
-    first_name: newUser.first_name,
-    last_name: newUser.last_name,
-    email: newUser.email,
-    password: newUser.password
-  })
-  .then(response => {
-    console.log('Registered');
-  })
+    .post('/users/register', {
+      username: newUser.username,
+      first_name: newUser.first_name,
+      last_name: newUser.last_name,
+      email: newUser.email,
+      password: newUser.password
+    })
+    .then(response => {
+      console.log('Registered');
+    })
 }
 
 export const login = user => {
@@ -19,22 +19,33 @@ export const login = user => {
     email: user.email,
     password: user.password
   })
-  .then(res => {
-    localStorage.setItem('usertoken', res.data.token);
-    return res.data;
-  })
-  .catch(err => {
-    console.log('Invalid username and password' + err);
-  })
+    .then(res => {
+      localStorage.setItem('usertoken', res.data.token);
+      return res.data;
+    })
+    .catch(err => {
+      console.log('Invalid username and password' + err);
+    })
 }
 
-export const getUser = id => {
+export const getUserById = id => {
   return axios
-  .get(`/users/getuser/${id}`)
-  .then(response => {
-    return response;
-  })
-  .catch(err => {
-    return err;
-  })
+    .get(`/users/getuser/${id}`)
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err;
+    })
+}
+
+export const getUsers = users => {
+  return axios
+    .get(`/users/getusers/`)
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err;
+    })
 }

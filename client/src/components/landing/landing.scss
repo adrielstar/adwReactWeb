@@ -96,12 +96,11 @@ main {
     }
 
     a {
-      color: color(primary-dark);
+      color: color(primary-light);
       border-radius: $borders;
       text-decoration: none;
       text-transform: uppercase;
       font-weight: bold;
-      background-color: color(accent);
       display: block;
       text-align: center;
       margin: 50px auto 0 auto;
